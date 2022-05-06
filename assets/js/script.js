@@ -1,4 +1,6 @@
 // Assignment code here
+
+//Declaring arrays with all possible values for different character types (lowercase letters, numbers, etc.)
 const lowerCaseLetters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 const upperCaseLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -24,14 +26,19 @@ generateBtn.addEventListener("click", writePassword);
 
 
 function generatePassword() {
+  //Variable receives the value the user inputs when answering the prompt
   var length = prompt("Please enter the number of characters you'd like in your password. Make sure the number is at least 8 and no more than 128.");
-  while (isNaN(length) || length < 8 || length > 128) {
-    length = prompt("Remember to only enter a number between 8 and 128! This will determine the length of your password.");
+  //If the user's answer isn't a number or doesn't fall into the right range, they will be reminded of the password criteria
+  if (isNaN(length) || length < 8 || length > 128) {
+    alert("Remember to only enter a number between 8 and 128! This will determine the length of your password.");
+    return "";
   }
+  //Variables store boolean values for user's response to each of the following prompts
   var lowerCaseBoolean = confirm("Would you like to include lowercase letters in your password?");
   var upperCaseBoolean = confirm("Would you like to include uppercase letters in your password?");
   var numberBoolean = confirm("Would you like to include numbers in your password?");
   var specialCharacterBoolean = confirm("Would you like to include special characters in your password?");
+  //If the user doesn't choose any character types, they will be reminded to choose at least one in order to move forward
   while (!lowerCaseBoolean && !upperCaseBoolean && !numberBoolean && !specialCharacterBoolean) {
     alert("You must select at least one character type in order to create a password.");
     lowerCaseBoolean = confirm("Would you like to include lowercase letters in your password?");
@@ -40,8 +47,10 @@ function generatePassword() {
     specialCharacterBoolean = confirm("Would you like to include special characters in your password?");
   }
 
+  //Declaring an empty array which will form the pool of potential characters based on the user's choices
   var passwordString = [];
 
+  //If the user said yes to a particular character type, that array will be concatenated into the passwordString array
   if (lowerCaseBoolean) {
     passwordString = passwordString.concat(lowerCaseLetters);
   }
@@ -60,10 +69,12 @@ function generatePassword() {
 
 
 
-  var generatedPassword = [];
+  //Declaring an empty string which will be populated in the for loop below and become the generated password
+  var generatedPassword = "";
 
 
-  for (i = 0; i < length; i++) {
+  //generatedPassword string receives a randomly generated element in the passwordString array
+  for (var i = 0; i < length; i++) {
     var characterNumber = Math.floor(Math.random() * passwordString.length);
     generatedPassword += passwordString[characterNumber];
   }
