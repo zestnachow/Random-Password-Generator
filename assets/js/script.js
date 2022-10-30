@@ -35,6 +35,29 @@ function generatePassword() {
     let lowerCaseBoolean = confirm("Would you like to include lowercase letters in your password?");
     let upperCaseBoolean = confirm("Would you like to include uppercase letters in your password?");
     let numberBoolean = confirm("Would you like to include numbers in your password?");
-    let specialCharactersBoolean = confirm("Would you like to include special characters in your password?");
+    let specialCharacterBoolean = confirm("Would you like to include special characters in your password?");
     // If the user doesn't choose any character types, they will be reminded to choose at least one in order to move forward
+    while (!lowerCaseBoolean && !upperCaseBoolean && !numberBoolean && !specialCharacterBoolean) {
+        alert("You must select at least one character type in order to create a password.");
+        lowerCaseBoolean = confirm("Would you like to include lowercase letters in your password?");
+        upperCaseBoolean = confirm("Would you like to include uppercase letters in your password?");
+        numberBoolean = confirm("Would you like to include numbers in your password?");
+        specialCharacterBoolean = confirm("Would you like to include special characters in your password?");
+    }
+    // Declaring an empty array which will form the pool of potential characters based on the user's choices
+    let passwordString = [];
+
+    // If the user said yes to a particular character type, that array will be concatenated into the passwordString array
+    if (lowerCaseBoolean) {
+        passwordString = passwordString.concat(lowerCaseLetters);
+    }
+    if (upperCaseBoolean) {
+        passwordString = passwordString.concat(upperCaseLetters);
+    }
+    if (numberBoolean) {
+        passwordString = passwordString.concat(numbers);
+    }
+    if (specialCharacterBoolean) {
+        passwordString = passwordString.concat(specialCharacters);
+    }
 }
