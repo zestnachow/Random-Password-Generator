@@ -60,4 +60,14 @@ function generatePassword() {
     if (specialCharacterBoolean) {
         passwordString = passwordString.concat(specialCharacters);
     }
+
+    // Declaring an empty string which will be populated in the for loop below and become the generated password
+    let generatedPassword = "";
+
+    // generatedPassword string receives a randomly generated element in the passwordString array
+    for (let i = 0; i < length; i++) {
+        let characterNumber = Math.floor(Math.random() * passwordString.length);
+        generatedPassword += passwordString[characterNumber];
+    }
+    return generatedPassword;
 }
